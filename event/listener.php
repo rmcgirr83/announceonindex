@@ -161,15 +161,15 @@ class listener implements EventSubscriberInterface
 			$sql_anounce_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TABLE => 'f'), 'ON' => 'f.forum_id = t.forum_id');
 			$sql_anounce_array['SELECT'] = $sql_array['SELECT'] . ', f.forum_name';
 
-			$sql_where = '';
+			$sql_and = '';
 			if ($this->config['announce_announcement_on_index'])
 			{
-				$sql_where = ' t.topic_type =' . POST_ANNOUNCE;
+				$sql_and = ' t.topic_type =' . POST_ANNOUNCE;
 			}
 
 			if ($this->config['announce_global_on_index'] && $this->config['announce_announcement_on_index'])
 			{
-				$sql_where =  't.topic_type =' . POST_ANNOUNCE . ' OR t.topic_type =  ' . POST_GLOBAL;
+				$sql_and = ' t.topic_type =' . POST_ANNOUNCE . ' OR t.topic_type =  ' . POST_GLOBAL;
 			}
 
 			if ($this->nationalflags !== null)
@@ -184,7 +184,7 @@ class listener implements EventSubscriberInterface
 				'LEFT_JOIN'	=> $sql_anounce_array['LEFT_JOIN'],
 
 				'WHERE'		=> $this->db->sql_in_set('t.forum_id', $g_forum_ary, false, true) . '
-						AND ' . $sql_where,
+					AND ' . $sql_and,
 				'ORDER_BY'	=> 't.topic_last_post_time DESC',
 			);
 
@@ -202,8 +202,6 @@ class listener implements EventSubscriberInterface
 				$rowset[$row['topic_id']] = $row;
 			}
 			$this->db->sql_freeresult($result);
-
-			$forum_tracking_info = array();
 
 			// Generate topic forum list...
 			$topic_forum_list = array();
@@ -280,7 +278,7 @@ class listener implements EventSubscriberInterface
 
 					'S_ALLOW_EVENTS'		=> ($this->config['announce_event']) ? true : false,
 					'S_UNREAD'				=> $unread_topic,
-					'USER_FLAG'				=> !empty($user_flag) ? $user_flag : '',
+					'USER_FLAG'				=> (!empty($user_flag)) ? $user_flag : '',
 					'U_LAST_POST'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id&amp;p=" . $row['topic_last_post_id']) . '#p' . $row['topic_last_post_id'],
 					'U_NEWEST_POST'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id&amp;view=unread") . '#unread',
 					'U_VIEW_TOPIC'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id"),
