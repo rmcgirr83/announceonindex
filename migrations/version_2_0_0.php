@@ -15,7 +15,7 @@ class version_2_0_0 extends \phpbb\db\migration\migration
 	{
 		return array('\david63\announceonindex\migrations\version_1_0_0');
 	}
-	
+
 	public function update_data()
 	{
 		return array(

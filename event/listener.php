@@ -16,12 +16,11 @@ use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\user;
 use phpbb\db\driver\driver_interface as db;
-use phpbb\language\language;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use phpbb\auth\auth;
 use phpbb\cache\service as cache;
 use phpbb\collapsiblecategories\operator\operator as cc_operator;
-use \rmcgirr83\nationalflags\core\nationalflags;
+use rmcgirr83\nationalflags\core\nationalflags;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -151,7 +150,7 @@ class listener implements EventSubscriberInterface
 					$sql_array['LEFT_JOIN'][] = array('FROM' => array(TOPICS_TRACK_TABLE => 'tt'), 'ON' => 'tt.topic_id = t.topic_id AND tt.user_id = ' . $this->user->data['user_id']);
 					$sql_array['SELECT'] .= ', tt.mark_time as mark_time';
 					$sql_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TRACK_TABLE => 'ft'), 'ON' => 'ft.forum_id = t.forum_id AND ft.user_id = ' . $this->user->data['user_id']);
-					$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';					
+					$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
 				}
 			}
 
@@ -162,6 +161,7 @@ class listener implements EventSubscriberInterface
 			$sql_anounce_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TABLE => 'f'), 'ON' => 'f.forum_id = t.forum_id');
 			$sql_anounce_array['SELECT'] = $sql_array['SELECT'] . ', f.forum_name';
 
+			$sql_where = '';
 			if ($this->config['announce_announcement_on_index'])
 			{
 				$sql_where = ' t.topic_type =' . POST_ANNOUNCE;
@@ -171,6 +171,7 @@ class listener implements EventSubscriberInterface
 			{
 				$sql_where =  't.topic_type =' . POST_ANNOUNCE . ' OR t.topic_type =  ' . POST_GLOBAL;
 			}
+
 			if ($this->nationalflags !== null)
 			{
 				$sql_anounce_array['SELECT'] = $sql_anounce_array['SELECT'] . ', u.user_flag';
@@ -203,7 +204,6 @@ class listener implements EventSubscriberInterface
 			$this->db->sql_freeresult($result);
 
 			$forum_tracking_info = array();
-
 
 			// Generate topic forum list...
 			$topic_forum_list = array();
