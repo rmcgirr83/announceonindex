@@ -21,7 +21,7 @@
 				{% for topicrow in loops.topicrow %}
 					<li class="row{% if topicrow.S_ROW_COUNT is even %} bg1{% else %} bg2{% endif %}">
 						<dl class="row-item {topicrow.TOPIC_IMG_STYLE}">
-							<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url('{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}'); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
+							<dt{% if topicrow.TOPIC_ICON_IMG and topicrow.S_TOPIC_ICONS %} style="background-image: url('{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}'); background-repeat: no-repeat;"{% endif %} title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
 							{% if topicrow.S_UNREAD and not S_IS_BOT %}<a href="{topicrow.U_NEWEST_POST}" class="row-item-link"></a>{% endif %}
 								<div class="list-inner">
 									{% if S_ALLOW_EVENTS %}

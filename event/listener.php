@@ -159,7 +159,7 @@ class listener implements EventSubscriberInterface
 
 			$sql_anounce_array['LEFT_JOIN'] = $sql_array['LEFT_JOIN'];
 			$sql_anounce_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TABLE => 'f'), 'ON' => 'f.forum_id = t.forum_id');
-			$sql_anounce_array['SELECT'] = $sql_array['SELECT'] . ', f.forum_name';
+			$sql_anounce_array['SELECT'] = $sql_array['SELECT'] . ', f.forum_name, f.enable_icons';
 
 			$sql_and = '';
 			if ($this->config['announce_announcement_on_index'])
@@ -278,7 +278,8 @@ class listener implements EventSubscriberInterface
 
 					'S_ALLOW_EVENTS'		=> ($this->config['announce_event']) ? true : false,
 					'S_UNREAD'				=> $unread_topic,
-					'USER_FLAG'				=> (!empty($user_flag)) ? $user_flag : '',
+					'S_TOPIC_ICONS'			=> ($row['enable_icons']) ? true : false,
+					'USER_FLAG'				=> !empty($user_flag) ? $user_flag : '',
 					'U_LAST_POST'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id&amp;p=" . $row['topic_last_post_id']) . '#p' . $row['topic_last_post_id'],
 					'U_NEWEST_POST'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id&amp;view=unread") . '#unread',
 					'U_VIEW_TOPIC'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id"),
