@@ -19,7 +19,7 @@
 
 				<ul class="topiclist forums">
 				{% for topicrow in loops.topicrow %}
-					<li class="row{% if topicrow.S_ROW_COUNT is even %} bg1{% else %} bg2{% endif %}">
+					<li class="row{% if topicrow.S_ROW_COUNT is even %} bg1{% else %} bg2{% endif %}{% if topicrow.S_POST_GLOBAL %} global-announce{% endif %} {% if topicrow.S_POST_ANNOUNCE %} announce{% endif %}">
 						<dl class="row-item {topicrow.TOPIC_IMG_STYLE}">
 							<dt{% if topicrow.TOPIC_ICON_IMG and topicrow.S_TOPIC_ICONS %} style="background-image: url('{T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}'); background-repeat: no-repeat;"{% endif %} title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
 							{% if topicrow.S_UNREAD and not S_IS_BOT %}<a href="{topicrow.U_NEWEST_POST}" class="row-item-link"></a>{% endif %}
