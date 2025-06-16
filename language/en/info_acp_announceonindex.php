@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'ANNOUNCE_ON_INDEX_LOG'			=> '<strong>Announcements on index settings updated </strong>',
 	'ANNOUNCE_ON_INDEX_MANAGE'		=> 'Manage announcements',
 	'ANNOUNCE_ON_INDEX_OPTIONS'		=> 'Announcement options',
-
+	'GLOBAL_ON_INDEX_LOG'			=> '<strong>Announcements on Index settings changed</strong>',
 	'SHOW_ANNOUNCEMENTS'			=> 'Show announcements',
 	'SHOW_ANNOUNCEMENTS_EXPLAIN'	=> 'Display all announcements on the index page.',
 	'SHOW_GLOBALS'					=> 'Show global announcements',
