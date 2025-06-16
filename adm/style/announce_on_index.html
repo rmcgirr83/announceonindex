@@ -2,7 +2,13 @@
 
 <h1>{L_ANNOUNCE_ON_INDEX}</h1>
 <p>{L_ANNOUNCE_ON_INDEX_EXPLAIN}</p>
-
+<fieldset>
+	<legend>{{ lang('BUY_ME_A_BEER') }}</legend>
+	<dl>
+		<dt><span>{{ lang('BUY_ME_A_BEER_EXPLAIN') }}</span></dt>
+		<dd><a href="{{ lang('BUY_ME_A_BEER_URL') }}" target="_blank" rel="noreferrer noopener"><img src="{{ lang('PAYPAL_IMAGE_URL') }}" border="0" alt="{{ lang('PAYPAL_ALT') }}" style="cursor:pointer;margin-top:15px;"></a>&nbsp;&nbsp;{{ lang('BUY_ME_A_COFFEE') }}</dd>
+	</dl>
+</fieldset>
 <form id="announceonindex" method="post" action="{U_ACTION}">
 
 	<fieldset>
