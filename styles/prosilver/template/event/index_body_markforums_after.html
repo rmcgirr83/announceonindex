@@ -28,7 +28,7 @@
 										<!-- EVENT topiclist_row_prepend -->
 									{% endif %}
 									{% if topicrow.S_UNREAD_TOPIC and not S_IS_BOT %}<a href="{topicrow.U_NEWEST_POST}"><i class="icon fa-file fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{NEW_POST}</span>
-												</a> {% endif %}<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a><br />
+												</a> {% endif %}<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a><br />{topicrow.TOPIC_DESCRIPTION}
 
 									{% if not S_IS_BOT %}
 										<div class="responsive-show" style="display: none;">
