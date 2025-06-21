@@ -184,7 +184,7 @@ class listener implements EventSubscriberInterface
 				'LEFT_JOIN'	=> $sql_anounce_array['LEFT_JOIN'],
 
 				'WHERE'		=> $this->db->sql_in_set('t.forum_id', $g_forum_ary, false, true) . '
-					AND ' . $sql_and,
+					AND ' . $this->db->sql_escape($sql_and),
 				'ORDER_BY'	=> 't.topic_last_post_time DESC',
 			);
 
@@ -256,7 +256,7 @@ class listener implements EventSubscriberInterface
 				{
 					$user_flag = $this->nationalflags->get_user_flag($row['user_flag'], 12);
 				}
-			
+
 				$this->template->assign_block_vars('topicrow', array(
 					'FIRST_POST_TIME'		=> $this->user->format_date($row['topic_time']),
 					'LAST_POST_TIME'		=> $this->user->format_date($row['topic_last_post_time']),
@@ -281,8 +281,8 @@ class listener implements EventSubscriberInterface
 					'S_UNREAD'				=> $unread_topic,
 					'S_TOPIC_ICONS'			=> (!empty($row['enable_icons'])) ? true : false,
 					'S_POST_ANNOUNCE'		=> ($row['topic_type'] == POST_ANNOUNCE) ? true : false,
-					'S_POST_GLOBAL'			=> ($row['topic_type'] == POST_GLOBAL) ? true : false,					
-					'USER_FLAG'				=> (!empty($user_flag)) ? $user_flag : '',
+					'S_POST_GLOBAL'			=> ($row['topic_type'] == POST_GLOBAL) ? true : false,
+					'USER_FLAG'				=> $user_flag,
 					'U_LAST_POST'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id&amp;p=" . $row['topic_last_post_id']) . '#p' . $row['topic_last_post_id'],
 					'U_NEWEST_POST'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id&amp;view=unread") . '#unread',
 					'U_VIEW_TOPIC'			=> append_sid("{$this->root_path}viewtopic.$this->phpEx", "f=$forum_id&amp;t=$topic_id"),
