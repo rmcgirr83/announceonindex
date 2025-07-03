@@ -1,4 +1,4 @@
-# Announcements On Index
+# Announcement on Index
 
 phpBB extension that displays announcements on the index page.
 
