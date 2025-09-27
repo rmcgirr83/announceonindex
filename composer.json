@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Displays announcements on the index page.",
     "homepage": "",
-    "version": "2.0.0",
-    "time": "2025-06-07",
+    "version": "2.0.1",
+    "time": "2025-09-27",
     "keywords": [
         "phpbb",
         "extension",

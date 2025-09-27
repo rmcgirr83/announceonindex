@@ -164,17 +164,17 @@ class listener implements EventSubscriberInterface
 			$sql_and = '';
 			if ($this->config['announce_announcement_on_index'])
 			{
-				$sql_and = ' t.topic_type =' . POST_ANNOUNCE;
+				$sql_and = ' t.topic_type = ' . POST_ANNOUNCE;
 			}
 
 			if ($this->config['announce_global_on_index'])
 			{
-				$sql_and = ' t.topic_type =  ' . POST_GLOBAL;
+				$sql_and = ' t.topic_type = ' . POST_GLOBAL;
 			}
 
 			if ($this->config['announce_global_on_index'] && $this->config['announce_announcement_on_index'])
 			{
-				$sql_and = ' t.topic_type =' . POST_ANNOUNCE . ' OR t.topic_type =  ' . POST_GLOBAL;
+				$sql_and = ' t.topic_type = ' . POST_ANNOUNCE . ' OR t.topic_type = ' . POST_GLOBAL;
 			}
 
 			if ($this->nationalflags !== null)
