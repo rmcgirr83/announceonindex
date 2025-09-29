@@ -21,7 +21,7 @@ on:
 jobs:
     # START Basic Checks Job (EPV, code sniffer, images check, etc.)
     basic-checks:
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 include:
@@ -32,8 +32,11 @@ jobs:
         name: PHP ${{ matrix.php }} - ${{ matrix.db }}
 
         steps:
+            - name: Update apt package index
+              run: sudo apt update
+
             - name: Checkout phpBB
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
               with:
                   repository: phpbb/phpbb
                   ref: ${{ env.PHPBB_BRANCH }}
